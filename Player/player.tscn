@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0x7v1u8v3cfn"]
+[gd_scene load_steps=7 format=3 uid="uid://b0x7v1u8v3cfn"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_pmnxo"]
 [ext_resource type="Script" path="res://Player/SmoothCamera.gd" id="2_u1o6p"]
+[ext_resource type="PackedScene" uid="uid://b27qirvnl6y6t" path="res://Weapons/SMG.tscn" id="3_4w7p2"]
 [ext_resource type="Script" path="res://Player/Crosshair.gd" id="3_j0dvd"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_xmg1t"]
@@ -23,6 +24,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 [node name="SmoothCamera" type="Camera3D" parent="CameraPivot"]
 top_level = true
 script = ExtResource("2_u1o6p")
+
+[node name="SMG" parent="CameraPivot/SmoothCamera" instance=ExtResource("3_4w7p2")]
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15
