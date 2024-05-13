@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://b0x7v1u8v3cfn"]
+[gd_scene load_steps=14 format=3 uid="uid://b0x7v1u8v3cfn"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_pmnxo"]
 [ext_resource type="Script" path="res://Player/SmoothCamera.gd" id="2_u1o6p"]
+[ext_resource type="PackedScene" uid="uid://b27qirvnl6y6t" path="res://Weapons/SMG.tscn" id="3_4w7p2"]
 [ext_resource type="PackedScene" uid="uid://we4lovivsaqt" path="res://Weapons/Rifle.tscn" id="3_b0xs6"]
 [ext_resource type="Script" path="res://Player/Crosshair.gd" id="3_j0dvd"]
+[ext_resource type="Script" path="res://Player/WeaponHandler.gd" id="3_n2tar"]
 [ext_resource type="Texture2D" uid="uid://y54b33aj188p" path="res://Player/damage.png" id="5_08hqo"]
 [ext_resource type="PackedScene" uid="uid://bnrf3dl7mj81d" path="res://Player/game_over_menu.tscn" id="6_7o6sa"]
 
@@ -92,8 +94,6 @@ script = ExtResource("2_u1o6p")
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="CameraPivot/SmoothCamera"]
 remote_path = NodePath("../../../SubViewportContainer/SubViewport/WeaponCamera")
 
-[node name="Rifle" parent="CameraPivot/SmoothCamera" instance=ExtResource("3_b0xs6")]
-
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -111,6 +111,15 @@ render_target_update_mode = 4
 [node name="WeaponCamera" type="Camera3D" parent="SubViewportContainer/SubViewport"]
 cull_mask = 2
 fov = 40.0
+
+[node name="WeaponHandler" type="Node3D" parent="SubViewportContainer/SubViewport/WeaponCamera" node_paths=PackedStringArray("weapon_1", "weapon_2")]
+script = ExtResource("3_n2tar")
+weapon_1 = NodePath("Rifle")
+weapon_2 = NodePath("SMG")
+
+[node name="Rifle" parent="SubViewportContainer/SubViewport/WeaponCamera/WeaponHandler" instance=ExtResource("3_b0xs6")]
+
+[node name="SMG" parent="SubViewportContainer/SubViewport/WeaponCamera/WeaponHandler" instance=ExtResource("3_4w7p2")]
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15
