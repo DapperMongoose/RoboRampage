@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dos3j02o7w657"]
+[gd_scene load_steps=14 format=3 uid="uid://dos3j02o7w657"]
 
 [ext_resource type="Script" path="res://Enemy/enemy.gd" id="1_pia3d"]
 [ext_resource type="PackedScene" uid="uid://dcw0l5risbhp1" path="res://Enemy/Drone.glb" id="2_ejppe"]
@@ -97,8 +97,28 @@ _data = {
 "RESET": SubResource("Animation_aydqy")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yo3vg"]
+animation = &"Attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6hkek"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jgj1r"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_63d8x"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6wdyg"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_2rf3g"]
-graph_offset = Vector2(-450, -278)
+states/Attack/node = SubResource("AnimationNodeAnimation_yo3vg")
+states/Attack/position = Vector2(575, 100)
+states/Idle/node = SubResource("AnimationNodeAnimation_6hkek")
+states/Idle/position = Vector2(405, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_jgj1r"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_63d8x"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_6wdyg")]
+graph_offset = Vector2(-450, -20)
 
 [node name="Enemy" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0151528, 0)
