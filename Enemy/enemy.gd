@@ -1,15 +1,14 @@
 extends CharacterBody3D
 class_name Enemy
 
+const SPEED = 5.0
+
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 @export var attack_range := 1.5
 @export var max_hitpoints := 100
 @export var enemy_damage := 20
-
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
